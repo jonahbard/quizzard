@@ -7,18 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C09BE4B29AB817D00C67BE9 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE4A29AB817D00C67BE9 /* Info.swift */; };
+		8C09BE4D29AD20A700C67BE9 /* EditTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE4C29AD20A700C67BE9 /* EditTimer.swift */; };
+		8C09BE4F29AE173200C67BE9 /* CreateTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE4E29AE173200C67BE9 /* CreateTimer.swift */; };
+		8C09BE5129B2120800C67BE9 /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE5029B2120800C67BE9 /* ColorPicker.swift */; };
 		8C73B0A229719C9000C21668 /* QuizzardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73B0A129719C9000C21668 /* QuizzardApp.swift */; };
-		8C73B0A429719C9000C21668 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73B0A329719C9000C21668 /* ContentView.swift */; };
 		8C73B0A629719C9100C21668 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C73B0A529719C9100C21668 /* Assets.xcassets */; };
 		8C73B0A929719C9100C21668 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C73B0A829719C9100C21668 /* Preview Assets.xcassets */; };
+		8C73B0B029719D8E00C21668 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73B0AF29719D8E00C21668 /* RootView.swift */; };
+		8C73B0B629719FDF00C21668 /* MinimalistTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73B0B529719FDF00C21668 /* MinimalistTimerView.swift */; };
+		8C73B0D42973098500C21668 /* TestTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73B0D32973098500C21668 /* TestTimer.swift */; };
+		8C73B0D629730D7400C21668 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73B0D529730D7400C21668 /* UserDataModel.swift */; };
+		8C73B0D829730F5200C21668 /* TimerPreviewBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73B0D729730F5200C21668 /* TimerPreviewBox.swift */; };
+		8C73B0DA29730F7000C21668 /* TimerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73B0D929730F7000C21668 /* TimerPreview.swift */; };
+		8C73B0DD2979EC5900C21668 /* MainTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73B0DC2979EC5900C21668 /* MainTimerView.swift */; };
+		8C73B0DF2979F67C00C21668 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73B0DE2979F67C00C21668 /* InfoView.swift */; };
+		8C73B0E5297E761B00C21668 /* FunctioningTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73B0E4297E761B00C21668 /* FunctioningTimerModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C09BE4A29AB817D00C67BE9 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		8C09BE4C29AD20A700C67BE9 /* EditTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimer.swift; sourceTree = "<group>"; };
+		8C09BE4E29AE173200C67BE9 /* CreateTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTimer.swift; sourceTree = "<group>"; };
+		8C09BE5029B2120800C67BE9 /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		8C73B09E29719C9000C21668 /* Quizzard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quizzard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C73B0A129719C9000C21668 /* QuizzardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzardApp.swift; sourceTree = "<group>"; };
-		8C73B0A329719C9000C21668 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8C73B0A529719C9100C21668 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C73B0A829719C9100C21668 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8C73B0AF29719D8E00C21668 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		8C73B0B529719FDF00C21668 /* MinimalistTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalistTimerView.swift; sourceTree = "<group>"; };
+		8C73B0D32973098500C21668 /* TestTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTimer.swift; sourceTree = "<group>"; };
+		8C73B0D529730D7400C21668 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
+		8C73B0D729730F5200C21668 /* TimerPreviewBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPreviewBox.swift; sourceTree = "<group>"; };
+		8C73B0D929730F7000C21668 /* TimerPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPreview.swift; sourceTree = "<group>"; };
+		8C73B0DC2979EC5900C21668 /* MainTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTimerView.swift; sourceTree = "<group>"; };
+		8C73B0DE2979F67C00C21668 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		8C73B0E4297E761B00C21668 /* FunctioningTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctioningTimerModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +56,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C28859C2980CAE500FD8CA9 /* Main View */ = {
+			isa = PBXGroup;
+			children = (
+				8C73B0AF29719D8E00C21668 /* RootView.swift */,
+				8C73B0D729730F5200C21668 /* TimerPreviewBox.swift */,
+				8C73B0DE2979F67C00C21668 /* InfoView.swift */,
+			);
+			path = "Main View";
+			sourceTree = "<group>";
+		};
+		8C28859D2980CB1400FD8CA9 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				8C73B0DC2979EC5900C21668 /* MainTimerView.swift */,
+				8C09BE4E29AE173200C67BE9 /* CreateTimer.swift */,
+				8C09BE4C29AD20A700C67BE9 /* EditTimer.swift */,
+				8C73B0D929730F7000C21668 /* TimerPreview.swift */,
+				8C73B0B529719FDF00C21668 /* MinimalistTimerView.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
 		8C73B09529719C9000C21668 = {
 			isa = PBXGroup;
 			children = (
@@ -52,7 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				8C73B0A129719C9000C21668 /* QuizzardApp.swift */,
-				8C73B0A329719C9000C21668 /* ContentView.swift */,
+				8C28859C2980CAE500FD8CA9 /* Main View */,
+				8C73B0DB2979EC0C00C21668 /* Model */,
+				8C28859D2980CB1400FD8CA9 /* Timer */,
 				8C73B0A529719C9100C21668 /* Assets.xcassets */,
 				8C73B0A729719C9100C21668 /* Preview Content */,
 			);
@@ -65,6 +113,18 @@
 				8C73B0A829719C9100C21668 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8C73B0DB2979EC0C00C21668 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8C73B0D32973098500C21668 /* TestTimer.swift */,
+				8C73B0D529730D7400C21668 /* UserDataModel.swift */,
+				8C73B0E4297E761B00C21668 /* FunctioningTimerModel.swift */,
+				8C09BE4A29AB817D00C67BE9 /* Info.swift */,
+				8C09BE5029B2120800C67BE9 /* ColorPicker.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +197,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C73B0A429719C9000C21668 /* ContentView.swift in Sources */,
+				8C73B0D629730D7400C21668 /* UserDataModel.swift in Sources */,
+				8C73B0E5297E761B00C21668 /* FunctioningTimerModel.swift in Sources */,
 				8C73B0A229719C9000C21668 /* QuizzardApp.swift in Sources */,
+				8C73B0DD2979EC5900C21668 /* MainTimerView.swift in Sources */,
+				8C73B0D42973098500C21668 /* TestTimer.swift in Sources */,
+				8C09BE4B29AB817D00C67BE9 /* Info.swift in Sources */,
+				8C73B0B629719FDF00C21668 /* MinimalistTimerView.swift in Sources */,
+				8C73B0D829730F5200C21668 /* TimerPreviewBox.swift in Sources */,
+				8C09BE4D29AD20A700C67BE9 /* EditTimer.swift in Sources */,
+				8C09BE5129B2120800C67BE9 /* ColorPicker.swift in Sources */,
+				8C73B0B029719D8E00C21668 /* RootView.swift in Sources */,
+				8C09BE4F29AE173200C67BE9 /* CreateTimer.swift in Sources */,
+				8C73B0DA29730F7000C21668 /* TimerPreview.swift in Sources */,
+				8C73B0DF2979F67C00C21668 /* InfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,13 +339,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Quizzard/Preview Content\"";
+				DEVELOPMENT_TEAM = XK6UF566BW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
+				"INFOPLIST_KEY_UISupportedInterfaceOrientations[sdk=*]" = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -295,13 +372,17 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Quizzard/Preview Content\"";
+				DEVELOPMENT_TEAM = XK6UF566BW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

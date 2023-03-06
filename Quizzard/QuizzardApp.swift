@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct QuizzardApp: App {
+    @StateObject private var model = UserDataModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .environmentObject(model)
         }
     }
 }
