@@ -12,6 +12,8 @@ struct RootView: View {
     @EnvironmentObject var model: UserDataModel
     
     @State var createTimerSheetPresented = false
+    @State var infoSheetPresented = false
+
 
     var body: some View {
         return GeometryReader { geometry in
@@ -62,14 +64,12 @@ struct RootView: View {
                                             .frame(alignment: .bottom)
                                         }
                                     Spacer()
-                                    Button (
-                                        action: {
-                                            print("show settings screen button!")
-                                        }
-                                    ) {
-                                        Image(systemName: "info.circle")
+                                    NavigationLink {
+                                        SettingsView()
+                                    } label: {
+                                        Image(systemName: "gear")
                                             .imageScale(.large)
-                                            .fontWeight(.bold)
+                                            .fontWeight(.semibold)
                                             .foregroundColor(.black)
                                             .padding(EdgeInsets(top: 10, leading: 0, bottom: 15, trailing: 18))
                                             .frame(alignment: .bottom)
@@ -102,7 +102,6 @@ struct RootView: View {
             .sheet(isPresented: $createTimerSheetPresented){
                 CreateTimer()
             }
-            .backgroundStyle(.white)
         }
     }
 }

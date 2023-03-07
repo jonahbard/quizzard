@@ -9,8 +9,15 @@ import Foundation
 
 final class Info {
     var defaultReviewPeriod = 0
+
     
     //default review period
+    
+    //clear all data
+    
+    //contact
+    
+    //time curving / questions take progressively more/less time
 
     //tutorial
     
@@ -23,6 +30,4 @@ final class Info {
     //app icon?
     //60+minutes, or show hours on timer?
     //background?
-    //tutorial
-    //about the app/me
 }
