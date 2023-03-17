@@ -107,7 +107,6 @@ struct TimerPreview: View {
                             }
                         
                     }
-//                    Button("Edit", role: .destructive, action: {print("edit mode!")})
                     Spacer()
                     HStack {
                         Spacer()

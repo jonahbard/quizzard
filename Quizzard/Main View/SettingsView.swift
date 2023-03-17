@@ -32,6 +32,9 @@ struct SettingsView: View {
                     Text("color scheme")
                 }
                 Section {
+                    Text("alarm sound")
+                }
+                Section {
                     Button {
                         clearAllSettingsAndData()
                     } label: {

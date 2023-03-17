@@ -11,8 +11,6 @@ import AVFoundation
 
 struct MainTimerView: View {
     
-    var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var model: UserDataModel
         
@@ -97,6 +95,7 @@ struct MainTimerView: View {
                     }
                     .disabled(!model.functioningTimerModel!.isRunning || model.functioningTimerModel!.currentQuestion >= model.functioningTimerModel!.totalQuestions)
                 }
+                
                 .padding()
                 .alert(isPresented: self.$timerDone){
                     Alert(
@@ -109,10 +108,15 @@ struct MainTimerView: View {
                     }))
                 }
                 Spacer()
+                NavigationLink {
+                    MinimalistTimerView(questionTimeLimitSecs: 120, rectangleHeightProportion: 1)
+                } label: {
+                    Image(systemName: "eye.slash").foregroundColor(.gray)
+                }
                 Spacer()
                 
             }
-            .onReceive(timer) { _ in
+            .onReceive(model.functioningTimerModel!.timer) { _ in
                 model.functioningTimerModel!.updateCountdowns()
                 totalTimeRemainingView = model.functioningTimerModel!.timeRemainingAsString
                 if model.functioningTimerModel!.timerDone == true {
@@ -127,7 +131,6 @@ struct MainTimerView: View {
         .onAppear(
             perform: {
                 model.functioningTimerModel!.start()
-                //model.functioningTimerModel!.calculateAverageTimePerQuestionRemaining()
                 totalTimeRemainingView = model.functioningTimerModel!.timeRemainingAsString
                 
             }

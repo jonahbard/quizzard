@@ -11,7 +11,6 @@
 		8C09BE4D29AD20A700C67BE9 /* EditTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE4C29AD20A700C67BE9 /* EditTimer.swift */; };
 		8C09BE4F29AE173200C67BE9 /* CreateTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE4E29AE173200C67BE9 /* CreateTimer.swift */; };
 		8C09BE5129B2120800C67BE9 /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE5029B2120800C67BE9 /* ColorPicker.swift */; };
-		8C09BE5329B7D1AD00C67BE9 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE5229B7D1AD00C67BE9 /* ColorScheme.swift */; };
 		8C73B0A229719C9000C21668 /* QuizzardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73B0A129719C9000C21668 /* QuizzardApp.swift */; };
 		8C73B0A629719C9100C21668 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C73B0A529719C9100C21668 /* Assets.xcassets */; };
 		8C73B0A929719C9100C21668 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C73B0A829719C9100C21668 /* Preview Assets.xcassets */; };
@@ -31,7 +30,6 @@
 		8C09BE4C29AD20A700C67BE9 /* EditTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimer.swift; sourceTree = "<group>"; };
 		8C09BE4E29AE173200C67BE9 /* CreateTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTimer.swift; sourceTree = "<group>"; };
 		8C09BE5029B2120800C67BE9 /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
-		8C09BE5229B7D1AD00C67BE9 /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		8C73B09E29719C9000C21668 /* Quizzard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quizzard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C73B0A129719C9000C21668 /* QuizzardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzardApp.swift; sourceTree = "<group>"; };
 		8C73B0A529719C9100C21668 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -71,10 +69,10 @@
 		8C28859D2980CB1400FD8CA9 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
-				8C73B0DC2979EC5900C21668 /* MainTimerView.swift */,
 				8C09BE4E29AE173200C67BE9 /* CreateTimer.swift */,
-				8C09BE4C29AD20A700C67BE9 /* EditTimer.swift */,
 				8C73B0D929730F7000C21668 /* TimerPreview.swift */,
+				8C09BE4C29AD20A700C67BE9 /* EditTimer.swift */,
+				8C73B0DC2979EC5900C21668 /* MainTimerView.swift */,
 				8C73B0B529719FDF00C21668 /* MinimalistTimerView.swift */,
 			);
 			path = Timer;
@@ -125,7 +123,6 @@
 				8C73B0E4297E761B00C21668 /* FunctioningTimerModel.swift */,
 				8C09BE4A29AB817D00C67BE9 /* Info.swift */,
 				8C09BE5029B2120800C67BE9 /* ColorPicker.swift */,
-				8C09BE5229B7D1AD00C67BE9 /* ColorScheme.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -201,7 +198,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C73B0D629730D7400C21668 /* UserDataModel.swift in Sources */,
-				8C09BE5329B7D1AD00C67BE9 /* ColorScheme.swift in Sources */,
 				8C73B0E5297E761B00C21668 /* FunctioningTimerModel.swift in Sources */,
 				8C73B0A229719C9000C21668 /* QuizzardApp.swift in Sources */,
 				8C73B0DD2979EC5900C21668 /* MainTimerView.swift in Sources */,

@@ -12,6 +12,7 @@ import SwiftUI
 struct TestTimer: Identifiable, Hashable, Codable {
     var id = UUID()
     var note: String = ""
+    var reviewPeriod: Int
     var lengthMin: Int
     var colorIndex: Int
     var title: String

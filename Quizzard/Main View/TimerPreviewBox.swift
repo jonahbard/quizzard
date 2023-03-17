@@ -42,7 +42,7 @@ struct TimerPreviewBox: View {
 
 struct TimerPreviewBox_Previews: PreviewProvider {
     static var previews: some View {
-        TimerPreviewBox(testTimer: TestTimer(lengthMin: 100, colorIndex: 0, title: "ACT: Math", numberOfQuestions: 75))
+        TimerPreviewBox(testTimer: TestTimer(reviewPeriod: 2, lengthMin: 100, colorIndex: 0, title: "ACT: Math", numberOfQuestions: 75))
             .environmentObject(UserDataModel())
     }
 }

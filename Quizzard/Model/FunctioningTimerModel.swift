@@ -9,12 +9,16 @@ import Foundation
 
 class FunctioningTimerModel: ObservableObject {
     
+    @Published var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
     @Published var lengthMin: Int
     @Published var currentQuestion = 1
     @Published var totalQuestions: Int
     
     @Published var timeRemainingThisQuestionAsString = " "
-    @Published var totalSecondsRemainingThisQuestion: Double = 0
+    @Published var totalSecondsRemainingThisQuestion = 0.0
+    @Published var timeRemainingThisQuestionProportion = 0.0
+    var avgTimePerQuestionRemaining = 0.0
     
     @Published var timeRemainingAsString: String = " "
     @Published var totalSecondsRemaining: Double
@@ -27,6 +31,10 @@ class FunctioningTimerModel: ObservableObject {
 
     var currentQuestionDueDate = Date()
     var timerEndDate = Date()
+    
+    //for time curving:
+    var firstQuestionTimeLimit: Int?
+    var lastQuestionTimeLimit: Int?
     
     
     init(length: Int, questions: Int){
@@ -61,20 +69,19 @@ class FunctioningTimerModel: ObservableObject {
         
         self.currentQuestion = 1
         
-        //Resets time displays
         self.timeRemainingAsString = "\(lengthMin):00"
         self.timeRemainingThisQuestionAsString = "\((Int(totalSecondsRemaining)/totalQuestions)/60):\((Int(totalSecondsRemaining)/totalQuestions)%60)"
     }
     
     func nextQuestion(){
-        if currentQuestion <= totalQuestions {
+        if currentQuestion < totalQuestions {
             currentQuestion += 1
             calculateAverageTimePerQuestionRemaining()
         }
     }
     
     func backQuestion(){
-        if currentQuestion >= 1 {
+        if currentQuestion > 1 {
             currentQuestion -= 1
             calculateAverageTimePerQuestionRemaining()
         }
@@ -82,9 +89,19 @@ class FunctioningTimerModel: ObservableObject {
     
     func calculateAverageTimePerQuestionRemaining(){
         totalSecondsRemainingThisQuestion = totalSecondsRemaining / Double((totalQuestions-currentQuestion)+1)
-        print("total sec remaining: \(Int(totalSecondsRemaining))")
-        print("time per question: \(totalSecondsRemainingThisQuestion)")
+        avgTimePerQuestionRemaining = totalSecondsRemainingThisQuestion
+        //print("total sec remaining: \(Int(totalSecondsRemaining))")
+        //print("time per question: \(totalSecondsRemainingThisQuestion)")
         currentQuestionDueDate = Calendar.current.date(byAdding: .second, value: Int(totalSecondsRemainingThisQuestion), to: Date())!
+    }
+    //time curving
+    func scaledQuestionTimeLimit(questionNumber: Int) -> Int {
+        guard totalQuestions > 2 else {return 0}
+        guard (firstQuestionTimeLimit != nil) && (lastQuestionTimeLimit != nil) else {return 0}
+        
+        let incrementsToMake = totalQuestions-1
+        let timeIncrement = (lengthMin*60)-(firstQuestionTimeLimit!+lastQuestionTimeLimit!)/incrementsToMake
+        return firstQuestionTimeLimit!+(questionNumber-1)*timeIncrement
     }
     
     func updateCountdowns(){
@@ -121,6 +138,8 @@ class FunctioningTimerModel: ObservableObject {
             let secondsRemainingThisQuestionThisMinute = calendar.component(.second, from: timeLeftThisQuestionDate)
             
             timeRemainingThisQuestionAsString = String(format:"%d:%02d", minutesRemainingThisQuestion, secondsRemainingThisQuestionThisMinute)
+            
+            timeRemainingThisQuestionProportion = totalSecondsRemainingThisQuestion/avgTimePerQuestionRemaining
             
         } else {
             

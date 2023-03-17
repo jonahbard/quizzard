@@ -24,19 +24,25 @@ struct RootView: View {
                             .frame(height: 120)
                             .foregroundColor(.clear)
                         VStack {
-                            ForEach(0 ..< model.userTimerList.count, id: \.self) { index in
-                                NavigationLink {
-                                    TimerPreview(indexInTimerList: index, notes: model.userTimerList[index].note)
-                                } label: {
-                                    TimerPreviewBox(testTimer: model.userTimerList[index])
-                                }.simultaneousGesture(TapGesture().onEnded{
-                                    model.selectedTestTimerIndex = model.userTimerList[index].id
-                                    model.selectedTestTimer = model.userTimerList[index]
-                                    model.functioningTimerModel = FunctioningTimerModel(length: model.userTimerList[index].lengthMin, questions: model.userTimerList[index].numberOfQuestions)
-                                })
-                            }
-                            .onDelete { indexSet in
-                                model.userTimerList.remove(atOffsets: indexSet)
+                            if model.userTimerList.count > 0 {
+                                ForEach(0 ..< model.userTimerList.count, id: \.self) { index in
+                                    NavigationLink {
+                                        TimerPreview(indexInTimerList: index, notes: model.userTimerList[index].note)
+                                    } label: {
+                                        TimerPreviewBox(testTimer: model.userTimerList[index])
+                                    }.simultaneousGesture(TapGesture().onEnded{
+                                        model.selectedTestTimerIndex = model.userTimerList[index].id
+                                        model.selectedTestTimer = model.userTimerList[index]
+                                        model.functioningTimerModel = FunctioningTimerModel(length: model.userTimerList[index].lengthMin, questions: model.userTimerList[index].numberOfQuestions)
+                                    })
+                                }
+                                .onDelete { indexSet in
+                                    model.userTimerList.remove(atOffsets: indexSet)
+                                }
+                            } else {
+                                Spacer()
+                                Text("tap + to add a timer!").foregroundColor(.gray)
+                                Spacer()
                             }
                         }
                     }
