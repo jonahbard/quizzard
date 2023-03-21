@@ -72,7 +72,10 @@ struct EditTimer: View {
                             
                             model.selectedTestTimer = model.userTimerList[indexInTimerList]
                             
-                            model.functioningTimerModel = FunctioningTimerModel(length: model.userTimerList[indexInTimerList].lengthMin, questions: model.userTimerList[indexInTimerList].numberOfQuestions)
+                            model.functioningTimerModel = FunctioningTimerModel(
+                                length: model.userTimerList[indexInTimerList].lengthMin,
+                                questions: model.userTimerList[indexInTimerList].numberOfQuestions,
+                                review: model.userTimerList[indexInTimerList].reviewPeriod)
                             
                             dismiss()
                         } else if (timeLimitMin*60)/numberOfQuestions < 5 {

@@ -62,7 +62,7 @@ struct CreateTimer: View {
                 ToolbarItem {
                     Button("save") {
                         if testNameField != "" && (timeLimitMin*60)/numberOfQuestions >= 5 {
-                            model.userTimerList.append(TestTimer(reviewPeriod: 2, lengthMin: timeLimitMin, colorIndex: colorIndex, title: testNameField, numberOfQuestions: numberOfQuestions))
+                            model.userTimerList.append(TestTimer(reviewPeriod: 0, lengthMin: timeLimitMin, colorIndex: colorIndex, title: testNameField, numberOfQuestions: numberOfQuestions))
                             dismiss()
                         } else if (timeLimitMin*60)/numberOfQuestions < 5 {
                             notEnoughTimeDialogShowing = true

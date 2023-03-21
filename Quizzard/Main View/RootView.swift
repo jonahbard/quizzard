@@ -17,6 +17,7 @@ struct RootView: View {
         
     @State var tutorialSheetPresented = !(QuizzardApp().defaults.bool(forKey: "tutorialWasShown")) ?? true
     
+
     var body: some View {
         return GeometryReader { geometry in
             NavigationStack {
@@ -35,7 +36,11 @@ struct RootView: View {
                                     }.simultaneousGesture(TapGesture().onEnded{
                                         model.selectedTestTimerIndex = model.userTimerList[index].id
                                         model.selectedTestTimer = model.userTimerList[index]
-                                        model.functioningTimerModel = FunctioningTimerModel(length: model.userTimerList[index].lengthMin, questions: model.userTimerList[index].numberOfQuestions)
+                                        model.functioningTimerModel = FunctioningTimerModel(
+                                            length: model.userTimerList[index].lengthMin,
+                                            questions: model.userTimerList[index].numberOfQuestions,
+                                            review: model.userTimerList[index].reviewPeriod
+                                        )
                                     })
                                 }
                                 .onDelete { indexSet in

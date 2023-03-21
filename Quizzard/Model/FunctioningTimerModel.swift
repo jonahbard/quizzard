@@ -11,9 +11,12 @@ class FunctioningTimerModel: ObservableObject {
     
     @Published var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
-    @Published var lengthMin: Int
     @Published var currentQuestion = 1
-    @Published var totalQuestions: Int
+
+    var lengthMin: Int
+    var totalQuestions: Int
+    var reviewPeriod: Int
+    @Published var reviewPeriodOn = false
     
     @Published var timeRemainingThisQuestionAsString = " "
     @Published var totalSecondsRemainingThisQuestion = 0.0
@@ -37,9 +40,10 @@ class FunctioningTimerModel: ObservableObject {
     var lastQuestionTimeLimit: Int?
     
     
-    init(length: Int, questions: Int){
+    init(length: Int, questions: Int, review: Int){
         lengthMin = length
         totalQuestions = questions
+        reviewPeriod = review
         totalSecondsRemaining = Double(60*length)
     }
     
@@ -77,21 +81,27 @@ class FunctioningTimerModel: ObservableObject {
         if currentQuestion < totalQuestions {
             currentQuestion += 1
             calculateAverageTimePerQuestionRemaining()
+            print(reviewPeriod)
+        } else if reviewPeriod > 0 {
+            print("turning on review period!")
+            reviewPeriodOn = true
         }
     }
     
     func backQuestion(){
-        if currentQuestion > 1 {
+        if currentQuestion > 1 && !reviewPeriodOn{
             currentQuestion -= 1
             calculateAverageTimePerQuestionRemaining()
+            reviewPeriodOn = false
+        } else if reviewPeriodOn {
+            reviewPeriodOn = false
+
         }
     }
     
-    func calculateAverageTimePerQuestionRemaining(){
+    func calculateAverageTimePerQuestionRemaining(){ //NEED TO ADD REVIEW PERIOD TO THIS
         totalSecondsRemainingThisQuestion = totalSecondsRemaining / Double((totalQuestions-currentQuestion)+1)
         avgTimePerQuestionRemaining = totalSecondsRemainingThisQuestion
-        //print("total sec remaining: \(Int(totalSecondsRemaining))")
-        //print("time per question: \(totalSecondsRemainingThisQuestion)")
         currentQuestionDueDate = Calendar.current.date(byAdding: .second, value: Int(totalSecondsRemainingThisQuestion), to: Date())!
     }
     //time curving

@@ -77,14 +77,22 @@ struct MainTimerView: View {
                 Text("total time remaining")
                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 30, trailing: 0))
                 Spacer()
-                Text(model.functioningTimerModel!.timeRemainingThisQuestionAsString)
-                    .font(.system(size: 70, weight: .medium))
-                    .padding()
-                    .frame(width: 250)
-                    .foregroundColor(model.functioningTimerModel!.questionDueDatePassed ? .red : .black)
+                if (model.selectedTestTimer!.reviewPeriod==0 || !model.functioningTimerModel!.reviewPeriodOn ){
+                    Text(model.functioningTimerModel!.timeRemainingThisQuestionAsString)
+                        .font(.system(size: 70, weight: .medium))
+                        .padding()
+                        .frame(width: 250)
+                        .foregroundColor(model.functioningTimerModel!.questionDueDatePassed ? .red : .black)
+                    
+                    Text("question \(model.functioningTimerModel!.currentQuestion) of \(model.functioningTimerModel!.totalQuestions)")
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 30, trailing: 0))
+                } else {
+                    Text("review time!")
+                        .bold()
+                        .font(.title3)
+                        .padding(EdgeInsets(top: 50, leading: 0, bottom: 50, trailing: 0))
+                }
                 
-                Text("question \(model.functioningTimerModel!.currentQuestion) of \(model.functioningTimerModel!.totalQuestions)")
-                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 30, trailing: 0))
                                 
                 HStack(spacing:50) {
                     Button("❮ back") {
@@ -94,7 +102,7 @@ struct MainTimerView: View {
                     Button("next ❯") {
                         model.functioningTimerModel!.nextQuestion()
                     }.foregroundColor(model.colors[model.selectedTestTimer!.colorIndex])
-                    .disabled(!model.functioningTimerModel!.isRunning || model.functioningTimerModel!.currentQuestion >= model.functioningTimerModel!.totalQuestions)
+                        .disabled(!model.functioningTimerModel!.isRunning || (model.functioningTimerModel!.currentQuestion >= model.functioningTimerModel!.totalQuestions && model.functioningTimerModel!.reviewPeriod == 0) || model.functioningTimerModel!.reviewPeriodOn)
                 }
                 
                 .padding()

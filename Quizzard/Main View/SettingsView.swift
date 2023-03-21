@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     @State var timeCurvingOn = false
     @State var tutorialSheetPresent = false
+    @State var resetAlertShowing = false
 
     @EnvironmentObject var model: UserDataModel
 
@@ -21,10 +22,10 @@ struct SettingsView: View {
         NavigationView {
             Form {
                 Section {
-                    Text("review period: coming soon")
+                    Text("review period: coming soon!")
                 }
                 Section {
-                    Text("time curving: coming soon")
+                    Text("time curving: coming soon!")
 //                    Toggle("time curving", isOn: $timeCurvingOn)
 //                        .toggleStyle(.switch)
                 }
@@ -33,11 +34,21 @@ struct SettingsView: View {
                 }
                 Section {
                     Button {
-                        clearAllSettingsAndData()
+                        resetAlertShowing = true
                     } label: {
-                        Text("clear all settings and data")
+                        Text("clear all data")
                             .foregroundColor(.red)
-                    }//.alert(Text("cleared!"), isPresented: <#T##Binding<Bool>#>), actions: )
+                    }.alert(isPresented: $resetAlertShowing){
+                        Alert (
+                            title: Text("are you sure?"),
+                            message: Text("all of your timers will be removed."),
+                            primaryButton: .destructive(Text("clear"), action: {
+                                clearAllSettingsAndData()
+                            }),
+                            secondaryButton: .cancel(Text("cancel"))
+                        )
+                    }
+                        
                 }
                 Section {
                     Text("feedback")

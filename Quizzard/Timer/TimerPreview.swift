@@ -16,9 +16,18 @@ struct TimerPreview: View {
     @Environment(\.dismiss) var dismiss
     
     @State var notes: String
-    @State var reviewPeriodLengthSeconds = 300
+    @State var reviewPeriodLengthMin = 1
     @State var editMode = false
     @State var deleteDialogShowing = false
+    
+    func calculateTimePerQuestion(testLengthMin: Int, questions: Int) -> String {
+        let timeExcludingReviewPeriod = testLengthMin-reviewPeriodLengthMin
+        let minPerQuestion = timeExcludingReviewPeriod / questions
+        let secRemainderPerQuestion = ((timeExcludingReviewPeriod*60)/questions)%60
+        let potentialZeroInTensPlace = secRemainderPerQuestion < 10 ? "0" : ""
+        
+    return "\(minPerQuestion):" + potentialZeroInTensPlace + "\(secRemainderPerQuestion)"
+    }
 
     
     @FocusState var notesFocused: Bool
@@ -55,16 +64,26 @@ struct TimerPreview: View {
                         .font(Font.system(.title))
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 0.01, trailing: 0))
                     
-                    Text("\(model.selectedTestTimer!.lengthMin) Minutes •  \(model.selectedTestTimer!.numberOfQuestions) Questions")
+                    Text("\(model.selectedTestTimer!.numberOfQuestions) Questions • \(model.selectedTestTimer!.lengthMin) Minutes")
                         .font(Font.system(.title3).smallCaps())
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
                     
-//                    Text("my review period: 5:00")
+                    Stepper(value: $reviewPeriodLengthMin, in: 0...(model.selectedTestTimer!.lengthMin/2), step: 1) {
+                        Text("review period: \(reviewPeriodLengthMin) min")
+                    } onEditingChanged: { _ in
+                        print("submitted review period: \(reviewPeriodLengthMin)")
+                        model.selectedTestTimer!.reviewPeriod = reviewPeriodLengthMin
+                        model.functioningTimerModel!.reviewPeriod = reviewPeriodLengthMin
+                    }
+                    .font(.headline)
+                    .foregroundColor(.black)
+                    
+//                    Text("my review period: \(reviewPeriodLengthMin):00")
 //                        .font(Font.system(.headline))
 //                        .foregroundColor(.black)
 //                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
                     
-                    Text("time per question: \(model.selectedTestTimer!.lengthMin / model.selectedTestTimer!.numberOfQuestions):" + ( ((((model.selectedTestTimer!.lengthMin*60)/model.selectedTestTimer!.numberOfQuestions)%60) < 10) ? "0" : "") + "\((((model.selectedTestTimer!.lengthMin*60)/model.selectedTestTimer!.numberOfQuestions)%60))")
+                    Text("time per question: " + calculateTimePerQuestion(testLengthMin: model.selectedTestTimer!.lengthMin, questions: model.selectedTestTimer!.numberOfQuestions))
                         .font(Font.system(.headline))
                         .foregroundColor(.black.opacity(0.4))
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 30, trailing: 0))
@@ -133,7 +152,7 @@ struct TimerPreview: View {
                         }
                         Spacer()
                     }
-                    Spacer()
+                    //Spacer()
                 }
                 .padding(EdgeInsets(top: 0, leading: 45, bottom: 0, trailing: 45))
             }

@@ -35,7 +35,7 @@ struct MinimalistTimerView: View {
                     Spacer()
                     Spacer()
                     Spacer()
-                    Text(String(model.functioningTimerModel!.currentQuestion))
+                    Text(model.functioningTimerModel!.reviewPeriodOn ? "review!" : String(model.functioningTimerModel!.currentQuestion))
                         .fontWeight(.bold)
                         .font(.title3)
                         .foregroundColor(rectangleHeightProportion > 0 ? .black : .red)
