@@ -33,30 +33,31 @@ struct MainTimerView: View {
                             model.functioningTimerModel!.pause()
                             viewIsPaused = true
                         }
-                    }
-                    Text("-")
-                    Button(model.functioningTimerModel!.isRunning || model.functioningTimerModel!.isPaused ? "reset" : "start") {
-                        if model.functioningTimerModel!.isRunning || model.functioningTimerModel!.isPaused {
-                            resetAlertShowing = true
-                        } else {
-                            model.functioningTimerModel!.start()
-                        }
-                    }
-                    .alert(isPresented: $resetAlertShowing){
-                        Alert(
-                            title: Text("reset?"),
-                            message: Text("this will completely reset your progress."),
-                            primaryButton: .destructive(Text("reset"), action: {
-                                model.functioningTimerModel!.reset()
-                                model.functioningTimerModel!.calculateAverageTimePerQuestionRemaining()
-                            }),
-                            secondaryButton: .cancel(Text("cancel"))
-                        )
-                    }
+                    }.foregroundColor(model.colors[model.selectedTestTimer!.colorIndex])
+                    ///RESET BUTTON TECHNICALLY UNNECESSARY
+//                    Text("-")
+//                    Button(model.functioningTimerModel!.isRunning || model.functioningTimerModel!.isPaused ? "reset" : "start") {
+//                        if model.functioningTimerModel!.isRunning || model.functioningTimerModel!.isPaused {
+//                            resetAlertShowing = true
+//                        } else {
+//                            model.functioningTimerModel!.start()
+//                        }
+//                    }.foregroundColor(model.colors[model.selectedTestTimer!.colorIndex])
+//                    .alert(isPresented: $resetAlertShowing){
+//                        Alert(
+//                            title: Text("reset?"),
+//                            message: Text("this will completely reset your progress."),
+//                            primaryButton: .destructive(Text("reset"), action: {
+//                                model.functioningTimerModel!.reset()
+//                                model.functioningTimerModel!.calculateAverageTimePerQuestionRemaining()
+//                            }),
+//                            secondaryButton: .cancel(Text("cancel"))
+//                        )
+//                    }
                     Text("-")
                     Button("exit") {
                         exitAlertShowing = true
-                    }
+                    }.foregroundColor(model.colors[model.selectedTestTimer!.colorIndex])
                     .alert(isPresented: $exitAlertShowing){
                         Alert(
                             title: Text("exit timer?"),
@@ -88,11 +89,11 @@ struct MainTimerView: View {
                 HStack(spacing:50) {
                     Button("❮ back") {
                         model.functioningTimerModel!.backQuestion()
-                    }
+                    }.foregroundColor(model.colors[model.selectedTestTimer!.colorIndex])
                     .disabled(!model.functioningTimerModel!.isRunning || model.functioningTimerModel!.currentQuestion <= 1)
                     Button("next ❯") {
                         model.functioningTimerModel!.nextQuestion()
-                    }
+                    }.foregroundColor(model.colors[model.selectedTestTimer!.colorIndex])
                     .disabled(!model.functioningTimerModel!.isRunning || model.functioningTimerModel!.currentQuestion >= model.functioningTimerModel!.totalQuestions)
                 }
                 
@@ -111,7 +112,9 @@ struct MainTimerView: View {
                 NavigationLink {
                     MinimalistTimerView(questionTimeLimitSecs: 120, rectangleHeightProportion: 1)
                 } label: {
-                    Image(systemName: "eye.slash").foregroundColor(.gray)
+                    Image(systemName: "eye.slash")
+                        .foregroundColor(model.colors[model.selectedTestTimer!.colorIndex])
+                        .imageScale(.large)
                 }
                 Spacer()
                 

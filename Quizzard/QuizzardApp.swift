@@ -10,6 +10,9 @@ import SwiftUI
 @main
 struct QuizzardApp: App {
     @StateObject private var model = UserDataModel()
+    
+    let defaults = UserDefaults.standard
+
     var body: some Scene {
         WindowGroup {
             RootView()

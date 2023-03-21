@@ -17,7 +17,7 @@ struct ColorPicker: View {
         HStack {
             ForEach(0..<model.colors.count, id: \.self) { i in
                 Circle()
-                    .foregroundColor(model.colors[i])
+                    .foregroundColor(model.colors[i].opacity(0.5))
                         .frame(width: 35)
                         .padding(5)
                         .onTapGesture {selectedColorIndex = i}
@@ -26,7 +26,7 @@ struct ColorPicker: View {
                                 Circle().stroke(selectedColorIndex == i ? .white : .clear, lineWidth: 5)
                                     .frame(width: 35)
                                 Circle()
-                                    .stroke(model.colors[i], lineWidth: selectedColorIndex == i ? 3 : 0)
+                                    .stroke(model.colors[i].opacity(0.5), lineWidth: selectedColorIndex == i ? 3 : 0)
                                     .frame(width:40)
                             }
                         }

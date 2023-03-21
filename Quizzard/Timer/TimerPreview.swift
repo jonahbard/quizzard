@@ -35,7 +35,7 @@ struct TimerPreview: View {
                 .cornerRadius(40)
                 .padding()
                 .edgesIgnoringSafeArea(.bottom)
-                .foregroundColor(model.colors[model.selectedTestTimer!.colorIndex]).opacity(0.5)
+                .foregroundColor(model.colors[model.selectedTestTimer!.colorIndex]).opacity(0.3)
                 VStack(alignment: .leading) {
                     HStack {
                         Spacer()

@@ -16,7 +16,7 @@ struct TimerPreviewBox: View {
         ZStack (alignment: .leading) {
             Rectangle()
                 .cornerRadius(30)
-                .foregroundColor(model.colors[testTimer.colorIndex])
+                .foregroundColor(model.colors[testTimer.colorIndex].opacity(0.5))
                 .frame(alignment: .leading)
                 .shadow(color: .gray.opacity(0.4), radius: 5, x: 0, y: 5)
             VStack(alignment: .leading) {

@@ -9,12 +9,14 @@ import SwiftUI
 
 struct RootView: View {
     
+    
     @EnvironmentObject var model: UserDataModel
     
     @State var createTimerSheetPresented = false
     @State var infoSheetPresented = false
-
-
+        
+    @State var tutorialSheetPresented = !(QuizzardApp().defaults.bool(forKey: "tutorialWasShown")) ?? true
+    
     var body: some View {
         return GeometryReader { geometry in
             NavigationStack {
@@ -107,6 +109,9 @@ struct RootView: View {
             )
             .sheet(isPresented: $createTimerSheetPresented){
                 CreateTimer()
+            }
+            .sheet(isPresented: $tutorialSheetPresented, onDismiss: {QuizzardApp().defaults.set(true, forKey: "tutorialWasShown")}){
+                TutorialView()
             }
         }
     }

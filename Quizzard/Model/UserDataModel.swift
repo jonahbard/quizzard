@@ -11,7 +11,7 @@ import SwiftUI
 
 final class UserDataModel: ObservableObject {
     
-    let colors: [Color] = [.yellow.opacity(0.5),  .green.opacity(0.5), .blue.opacity(0.5), .purple.opacity(0.5), .indigo.opacity(0.5)]
+    let colors: [Color] = [.red, .purple, .indigo, .blue, .green]
     
     @Published var userTimerList: [TestTimer] = [
         TestTimer(reviewPeriod: 2, lengthMin: 10, colorIndex: 1, title: "sample timer", numberOfQuestions: 4)

@@ -9,27 +9,24 @@ import SwiftUI
 
 struct SettingsView: View {
     @State var timeCurvingOn = false
-    
+    @State var tutorialSheetPresent = false
+
+    @EnvironmentObject var model: UserDataModel
+
     func clearAllSettingsAndData() {
-        return
-    }
-    
-    func showTutorial() {
-        return
+        model.userTimerList.removeAll()
     }
     
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    Text("default review period")
+                    Text("review period: coming soon")
                 }
                 Section {
-                    Toggle("time curving", isOn: $timeCurvingOn)
-                        .toggleStyle(.switch)
-                }
-                Section {
-                    Text("color scheme")
+                    Text("time curving: coming soon")
+//                    Toggle("time curving", isOn: $timeCurvingOn)
+//                        .toggleStyle(.switch)
                 }
                 Section {
                     Text("alarm sound")
@@ -40,7 +37,7 @@ struct SettingsView: View {
                     } label: {
                         Text("clear all settings and data")
                             .foregroundColor(.red)
-                    }
+                    }//.alert(Text("cleared!"), isPresented: <#T##Binding<Bool>#>), actions: )
                 }
                 Section {
                     Text("feedback")
@@ -51,7 +48,7 @@ struct SettingsView: View {
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button {
-                        showTutorial()
+                        tutorialSheetPresent = true
                     } label: {
                         Image(systemName: "questionmark.circle")
                             .foregroundColor(.black)
@@ -59,6 +56,9 @@ struct SettingsView: View {
                             .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10))
                     }
                 }
+            }
+            .sheet(isPresented: $tutorialSheetPresent){
+                TutorialView()
             }
 
         }

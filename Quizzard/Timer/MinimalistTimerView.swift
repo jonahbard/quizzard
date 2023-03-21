@@ -10,12 +10,13 @@ import SwiftUI
 struct MinimalistTimerView: View {
     
     var questionTimeLimitSecs: Int
-    @State var rectangleHeightProportion: Double
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var model: UserDataModel
     
     @State var menuShown = false
+    @State var rectangleHeightProportion: Double
+    @State var paused = false
     
     func resizeRectangle(){
         if rectangleHeightProportion > 0 {
@@ -29,7 +30,7 @@ struct MinimalistTimerView: View {
                 Rectangle()
                     .frame(width: geometry.size.width, height: geometry.size.height*rectangleHeightProportion)
                     .opacity(0.5)
-                    .foregroundColor(model.colors[model.selectedTestTimer!.colorIndex])
+                    .foregroundColor(model.colors[model.selectedTestTimer!.colorIndex].opacity(0.5))
                 VStack {
                     Spacer()
                     Spacer()
@@ -45,22 +46,34 @@ struct MinimalistTimerView: View {
                     if !menuShown {
                         Button {
                             menuShown = true
-                            print("trying to show menu")
                         } label: {
-                            Text("· · ·").fontWeight(.black).foregroundColor(.black).font(.title3)
-                        }.buttonStyle(.bordered)
+                            Text("· · ·")
+                                .fontWeight(.black).foregroundColor(.black).font(.title3)
+                        }.padding()
                     } else {
                         HStack {
                             Button("back"){
                                 dismiss()
-                            }
+                            }.foregroundColor(.black)
                             Text(" - ")
-                            Button("nvm"){
+                            Button(paused ? "resume" : "pause") {
+                                if model.functioningTimerModel!.isPaused {
+                                    paused = false
+                                    model.functioningTimerModel!.resume()
+                                } else {
+                                    model.functioningTimerModel!.pause()
+                                    paused = true
+                                }
+                            }.foregroundColor(.black)
+                            Text(" - ")
+                            Button("hide"){
                                 menuShown = false
-                            }
+                            }.foregroundColor(.black)
                         }
+                        .padding()
+
                     }
-                    
+
                     HStack {
                         Button {
                             model.functioningTimerModel!.backQuestion()
@@ -79,13 +92,15 @@ struct MinimalistTimerView: View {
                                 .frame(width: 2*geometry.size.width/5)
                                 .foregroundColor(.gray)
                         }
-                        
+
                     }
                 }
             }
             .onReceive(model.functioningTimerModel!.timer) { _ in
-                withAnimation(.linear(duration: 1)){
-                    resizeRectangle()
+                if !paused {
+                    withAnimation(.linear(duration: 1)){
+                        resizeRectangle()
+                    }
                 }
                 if model.functioningTimerModel!.timerDone {
                     dismiss()
@@ -93,7 +108,8 @@ struct MinimalistTimerView: View {
             }
         }
         .ignoresSafeArea(.all)
-
+        .navigationBarBackButtonHidden()
+        .statusBarHidden()
     }
 }
 

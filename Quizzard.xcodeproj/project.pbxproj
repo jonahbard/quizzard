@@ -11,6 +11,10 @@
 		8C09BE4D29AD20A700C67BE9 /* EditTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE4C29AD20A700C67BE9 /* EditTimer.swift */; };
 		8C09BE4F29AE173200C67BE9 /* CreateTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE4E29AE173200C67BE9 /* CreateTimer.swift */; };
 		8C09BE5129B2120800C67BE9 /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE5029B2120800C67BE9 /* ColorPicker.swift */; };
+		8C09BE5529C79C2600C67BE9 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE5429C79C2600C67BE9 /* TutorialView.swift */; };
+		8C09BE5729C79CA300C67BE9 /* TutorialPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE5629C79CA300C67BE9 /* TutorialPageModel.swift */; };
+		8C09BE5B29C7A1A100C67BE9 /* TutorialPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE5A29C7A1A100C67BE9 /* TutorialPageView.swift */; };
+		8C09BE6029C8809000C67BE9 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C09BE5F29C8809000C67BE9 /* Defaults.swift */; };
 		8C73B0A229719C9000C21668 /* QuizzardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C73B0A129719C9000C21668 /* QuizzardApp.swift */; };
 		8C73B0A629719C9100C21668 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C73B0A529719C9100C21668 /* Assets.xcassets */; };
 		8C73B0A929719C9100C21668 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C73B0A829719C9100C21668 /* Preview Assets.xcassets */; };
@@ -30,6 +34,10 @@
 		8C09BE4C29AD20A700C67BE9 /* EditTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTimer.swift; sourceTree = "<group>"; };
 		8C09BE4E29AE173200C67BE9 /* CreateTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTimer.swift; sourceTree = "<group>"; };
 		8C09BE5029B2120800C67BE9 /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
+		8C09BE5429C79C2600C67BE9 /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
+		8C09BE5629C79CA300C67BE9 /* TutorialPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageModel.swift; sourceTree = "<group>"; };
+		8C09BE5A29C7A1A100C67BE9 /* TutorialPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageView.swift; sourceTree = "<group>"; };
+		8C09BE5F29C8809000C67BE9 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		8C73B09E29719C9000C21668 /* Quizzard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quizzard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C73B0A129719C9000C21668 /* QuizzardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzardApp.swift; sourceTree = "<group>"; };
 		8C73B0A529719C9100C21668 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,6 +64,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C09BE5D29C7A66300C67BE9 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				8C09BE5429C79C2600C67BE9 /* TutorialView.swift */,
+				8C09BE5A29C7A1A100C67BE9 /* TutorialPageView.swift */,
+				8C09BE5629C79CA300C67BE9 /* TutorialPageModel.swift */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
 		8C28859C2980CAE500FD8CA9 /* Main View */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +117,7 @@
 			children = (
 				8C73B0A129719C9000C21668 /* QuizzardApp.swift */,
 				8C28859C2980CAE500FD8CA9 /* Main View */,
+				8C09BE5D29C7A66300C67BE9 /* Tutorial */,
 				8C73B0DB2979EC0C00C21668 /* Model */,
 				8C28859D2980CB1400FD8CA9 /* Timer */,
 				8C73B0A529719C9100C21668 /* Assets.xcassets */,
@@ -123,6 +142,7 @@
 				8C73B0E4297E761B00C21668 /* FunctioningTimerModel.swift */,
 				8C09BE4A29AB817D00C67BE9 /* Info.swift */,
 				8C09BE5029B2120800C67BE9 /* ColorPicker.swift */,
+				8C09BE5F29C8809000C67BE9 /* Defaults.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -201,11 +221,15 @@
 				8C73B0E5297E761B00C21668 /* FunctioningTimerModel.swift in Sources */,
 				8C73B0A229719C9000C21668 /* QuizzardApp.swift in Sources */,
 				8C73B0DD2979EC5900C21668 /* MainTimerView.swift in Sources */,
+				8C09BE5729C79CA300C67BE9 /* TutorialPageModel.swift in Sources */,
 				8C73B0D42973098500C21668 /* TestTimer.swift in Sources */,
 				8C09BE4B29AB817D00C67BE9 /* Info.swift in Sources */,
 				8C73B0B629719FDF00C21668 /* MinimalistTimerView.swift in Sources */,
 				8C73B0D829730F5200C21668 /* TimerPreviewBox.swift in Sources */,
+				8C09BE6029C8809000C67BE9 /* Defaults.swift in Sources */,
+				8C09BE5529C79C2600C67BE9 /* TutorialView.swift in Sources */,
 				8C09BE4D29AD20A700C67BE9 /* EditTimer.swift in Sources */,
+				8C09BE5B29C7A1A100C67BE9 /* TutorialPageView.swift in Sources */,
 				8C09BE5129B2120800C67BE9 /* ColorPicker.swift in Sources */,
 				8C73B0B029719D8E00C21668 /* RootView.swift in Sources */,
 				8C09BE4F29AE173200C67BE9 /* CreateTimer.swift in Sources */,
