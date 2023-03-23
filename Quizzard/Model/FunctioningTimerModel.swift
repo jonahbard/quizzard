@@ -25,6 +25,7 @@ class FunctioningTimerModel: ObservableObject {
     
     @Published var timeRemainingAsString: String = " "
     @Published var totalSecondsRemaining: Double
+    @Published var totalSecondsRemainingMinusReview: Double
     
     @Published var isRunning = false
     @Published var isPaused = false
@@ -45,9 +46,11 @@ class FunctioningTimerModel: ObservableObject {
         totalQuestions = questions
         reviewPeriod = review
         totalSecondsRemaining = Double(60*length)
+        totalSecondsRemainingMinusReview = Double(60*length)-Double(60*review)
     }
     
     func start() {
+        totalSecondsRemainingMinusReview = totalSecondsRemaining-Double(60*reviewPeriod)
         self.timerEndDate = Calendar.current.date(byAdding: .minute, value: lengthMin, to: Date())!
         self.isRunning = true
         timerDone = false
@@ -74,16 +77,14 @@ class FunctioningTimerModel: ObservableObject {
         self.currentQuestion = 1
         
         self.timeRemainingAsString = "\(lengthMin):00"
-        self.timeRemainingThisQuestionAsString = "\((Int(totalSecondsRemaining)/totalQuestions)/60):\((Int(totalSecondsRemaining)/totalQuestions)%60)"
+        self.timeRemainingThisQuestionAsString = "\((Int(totalSecondsRemainingMinusReview)/totalQuestions)/60):\((Int(totalSecondsRemainingMinusReview)/totalQuestions)%60)"
     }
     
     func nextQuestion(){
         if currentQuestion < totalQuestions {
             currentQuestion += 1
             calculateAverageTimePerQuestionRemaining()
-            print(reviewPeriod)
         } else if reviewPeriod > 0 {
-            print("turning on review period!")
             reviewPeriodOn = true
         }
     }
@@ -100,7 +101,7 @@ class FunctioningTimerModel: ObservableObject {
     }
     
     func calculateAverageTimePerQuestionRemaining(){ //NEED TO ADD REVIEW PERIOD TO THIS
-        totalSecondsRemainingThisQuestion = totalSecondsRemaining / Double((totalQuestions-currentQuestion)+1)
+        totalSecondsRemainingThisQuestion = totalSecondsRemainingMinusReview / Double((totalQuestions-currentQuestion)+1)
         avgTimePerQuestionRemaining = totalSecondsRemainingThisQuestion
         currentQuestionDueDate = Calendar.current.date(byAdding: .second, value: Int(totalSecondsRemainingThisQuestion), to: Date())!
     }
@@ -127,6 +128,7 @@ class FunctioningTimerModel: ObservableObject {
         let currentDate = Date()
         
         totalSecondsRemaining = timerEndDate.timeIntervalSince1970 - currentDate.timeIntervalSince1970
+        totalSecondsRemainingMinusReview = totalSecondsRemaining-Double(reviewPeriod*60)
         
         let date = Date(timeIntervalSince1970: totalSecondsRemaining)
         let calendar = Calendar.current

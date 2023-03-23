@@ -21,6 +21,8 @@ struct EditTimer: View {
     @State var notEnoughTimeDialogShowing = false
     @State var makeATitleDialogShowing = false
     
+    @FocusState var titleFocused: Bool
+    
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -31,6 +33,8 @@ struct EditTimer: View {
                         .padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 7))
                         .font(.title3).fontWeight(.medium)
                         .textInputAutocapitalization(.never)
+                        .focused($titleFocused)
+                        .submitLabel(.done)
                     Picker("time limit", selection: $timeLimitMin) {
                         ForEach(1...90, id: \.self) { number in
                             if number == 1 {
@@ -91,6 +95,8 @@ struct EditTimer: View {
             }
             .alert(isPresented: $notEnoughTimeDialogShowing){
                 Alert(title: Text("slow down there, cowboy 🤠"), message: Text("are you sure you have enough time for each question?"))
+            }.onAppear {
+                titleFocused = true
             }
             
         }

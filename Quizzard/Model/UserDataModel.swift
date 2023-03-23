@@ -19,7 +19,14 @@ final class UserDataModel: ObservableObject {
     @Published var selectedTestTimer: TestTimer?
     @Published var selectedTestTimerIndex: UUID?
     @Published var functioningTimerModel: FunctioningTimerModel?
+    //@Published var settings = Info()
     
-    @Published var settings = Info()
+    func updateTimerFromSelected() {
+        for i: Int in 0...userTimerList.count-1 {
+            if userTimerList[i].id == selectedTestTimerIndex {
+                userTimerList[i] = selectedTestTimer!
+            }
+        }
+    }
     
 }

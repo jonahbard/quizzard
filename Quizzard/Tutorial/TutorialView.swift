@@ -7,11 +7,20 @@
 
 import SwiftUI
 
+typealias action = () -> Void
+
+
 struct TutorialView: View {
+    
+    init(handler: @escaping action) {
+        self.handler = handler
+    }
+    
     
     @State private var pageIndex = 0
     @Environment(\.dismiss) var dismiss
-
+    
+    let handler: action
     let pages: [TutorialPage] = TutorialPage.pages
     let dotAppearance = UIPageControl.appearance()
     
@@ -26,7 +35,8 @@ struct TutorialView: View {
                     if page.index+1==pages.count {
                         withAnimation {
                             Button("let's go!"){
-                                pageIndex+1 != pages.count ? nextPage() : dismissAndCreateFirstTimer()
+                                dismiss()
+                                handler()
                             }.buttonStyle(.bordered).buttonBorderShape(.capsule)
                         }
                     }
@@ -64,8 +74,8 @@ struct TutorialView: View {
     }
 }
 
-struct TutorialView_Previews: PreviewProvider {
-    static var previews: some View {
-        TutorialView()
-    }
-}
+//struct TutorialView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TutorialView()
+//    }
+//}

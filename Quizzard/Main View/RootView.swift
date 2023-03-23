@@ -9,13 +9,14 @@ import SwiftUI
 
 struct RootView: View {
     
+    @AppStorage("tutorialWasShown") var tutorialWasShown = false
     
     @EnvironmentObject var model: UserDataModel
     
     @State var createTimerSheetPresented = false
     @State var infoSheetPresented = false
         
-    @State var tutorialSheetPresented = !(QuizzardApp().defaults.bool(forKey: "tutorialWasShown")) ?? true
+    //@State var tutorialSheetPresented = !(QuizzardApp().defaults.bool(forKey: "tutorialWasShown")) ?? true
     
 
     var body: some View {
@@ -115,9 +116,13 @@ struct RootView: View {
             .sheet(isPresented: $createTimerSheetPresented){
                 CreateTimer()
             }
-            .sheet(isPresented: $tutorialSheetPresented, onDismiss: {QuizzardApp().defaults.set(true, forKey: "tutorialWasShown")}){
-                TutorialView()
-            }
+            .fullScreenCover(
+                isPresented: .constant(!tutorialWasShown), content: {
+                    TutorialView() {
+                        tutorialWasShown = true
+                    }
+                }
+            )
         }
     }
 }

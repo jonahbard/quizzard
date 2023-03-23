@@ -16,7 +16,7 @@ struct TimerPreview: View {
     @Environment(\.dismiss) var dismiss
     
     @State var notes: String
-    @State var reviewPeriodLengthMin = 1
+    @State var reviewPeriodLengthMin = 0
     @State var editMode = false
     @State var deleteDialogShowing = false
     
@@ -25,12 +25,11 @@ struct TimerPreview: View {
         let minPerQuestion = timeExcludingReviewPeriod / questions
         let secRemainderPerQuestion = ((timeExcludingReviewPeriod*60)/questions)%60
         let potentialZeroInTensPlace = secRemainderPerQuestion < 10 ? "0" : ""
-        
-    return "\(minPerQuestion):" + potentialZeroInTensPlace + "\(secRemainderPerQuestion)"
+        return "\(minPerQuestion):" + potentialZeroInTensPlace + "\(secRemainderPerQuestion)"
     }
 
-    
     @FocusState var notesFocused: Bool
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -74,6 +73,7 @@ struct TimerPreview: View {
                         print("submitted review period: \(reviewPeriodLengthMin)")
                         model.selectedTestTimer!.reviewPeriod = reviewPeriodLengthMin
                         model.functioningTimerModel!.reviewPeriod = reviewPeriodLengthMin
+                        model.updateTimerFromSelected()
                     }
                     .font(.headline)
                     .foregroundColor(.black)
@@ -111,6 +111,7 @@ struct TimerPreview: View {
                             .focused($notesFocused)
                             .frame(width: 270, height: 240, alignment: .topLeading)
                             .lineLimit(3...)
+                            .textInputAutocapitalization(.never)
                             .submitLabel(.return)
                             .onSubmit({return})
                             .toolbar{
@@ -121,6 +122,7 @@ struct TimerPreview: View {
                                     Button("done"){
                                         notesFocused = false
                                         model.selectedTestTimer!.note = notes
+                                        model.updateTimerFromSelected()
                                     }
                                 }
                             }
@@ -156,10 +158,14 @@ struct TimerPreview: View {
                 }
                 .padding(EdgeInsets(top: 0, leading: 45, bottom: 0, trailing: 45))
             }
+            .onAppear(){
+                reviewPeriodLengthMin = model.selectedTestTimer!.reviewPeriod
+            }
             .ignoresSafeArea(.keyboard)
             .sheet(isPresented: $editMode){
                 EditTimer(indexInTimerList: self.indexInTimerList, testNameField: model.selectedTestTimer!.title, timeLimitMin: model.selectedTestTimer!.lengthMin, numberOfQuestions: model.selectedTestTimer!.numberOfQuestions, colorIndex: model.selectedTestTimer!.colorIndex)
             }
+            
         }
         
     }

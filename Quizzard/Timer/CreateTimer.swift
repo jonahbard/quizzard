@@ -20,6 +20,8 @@ struct CreateTimer: View {
     
     @Environment(\.dismiss) var dismiss
     
+    @FocusState var titleFocused: Bool
+    
     var body: some View {
         NavigationView {
             Form {
@@ -28,6 +30,8 @@ struct CreateTimer: View {
                         .padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 7))
                         .font(.title3).fontWeight(.medium)
                         .textInputAutocapitalization(.never)
+                        .focused($titleFocused)
+                        .submitLabel(.done)
                     
                     Picker("time limit", selection: $timeLimitMin) {
                         ForEach(1...90, id: \.self) { number in
@@ -81,8 +85,12 @@ struct CreateTimer: View {
                         Alert(title: Text("hmmm... 🤔"), message: Text("your test needs a name!"))
                     }
                 }
-            }.alert(isPresented: $notEnoughTimeDialogShowing){
+            }
+            .alert(isPresented: $notEnoughTimeDialogShowing){
                 Alert(title: Text("slow down there, cowboy 🤠"), message: Text("are you sure you have enough time for each question?"))
+            }
+            .onAppear {
+                titleFocused = true
             }
             
             
