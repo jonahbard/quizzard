@@ -61,11 +61,11 @@ struct TimerPreview: View {
                     Text(model.selectedTestTimer!.title)
                         .fontWeight(.heavy)
                         .font(Font.system(.title))
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0.01, trailing: 0))
+                        .padding(.bottom, 0.01)
                     
                     Text("\(model.selectedTestTimer!.numberOfQuestions) Questions • \(model.selectedTestTimer!.lengthMin) Minutes")
                         .font(Font.system(.title3).smallCaps())
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
+                        .padding(.bottom, 20)
                     
                     Stepper(value: $reviewPeriodLengthMin, in: 0...(model.selectedTestTimer!.lengthMin/2), step: 1) {
                         Text("review period: \(reviewPeriodLengthMin) min")
@@ -86,20 +86,22 @@ struct TimerPreview: View {
                     Text("time per question: " + calculateTimePerQuestion(testLengthMin: model.selectedTestTimer!.lengthMin, questions: model.selectedTestTimer!.numberOfQuestions))
                         .font(Font.system(.headline))
                         .foregroundColor(.black.opacity(0.4))
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 30, trailing: 0))
+                        .padding(.bottom, 30)
                     
                     HStack {
                         Spacer()
                         NavigationLink {
                             MainTimerView()
-                                .onAppear(perform: {
-                                    model.functioningTimerModel!.start()
-                                })
+//                                .onAppear(perform: {
+//                                    model.functioningTimerModel!.start()
+//                                })
                         } label: {
                             Text("start session")
-                        }
+                        }.simultaneousGesture(TapGesture().onEnded{
+                            model.functioningTimerModel!.start()
+                        })
                         .buttonStyle(.bordered)
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 30, trailing: 0))
+                        .padding(.bottom, 30)
                         Spacer()
                     }
                     ZStack {

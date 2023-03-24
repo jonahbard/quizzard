@@ -21,17 +21,13 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section {
-                    Text("review period: coming soon!")
-                }
-                Section {
-                    Text("time curving: coming soon!")
-//                    Toggle("time curving", isOn: $timeCurvingOn)
-//                        .toggleStyle(.switch)
-                }
-                Section {
+                Section("the following features coming soon...") {
+                    Text("default review period")
+                    Text("question auto-navigation")
+                    Text("time curving")
                     Text("alarm sound")
                 }
+                    
                 Section {
                     Button {
                         resetAlertShowing = true
@@ -51,8 +47,7 @@ struct SettingsView: View {
                         
                 }
                 Section {
-                    Text("feedback")
-                    Text("contact me")
+                    Link("contact me", destination: URL(string: "mailto:jonahbard@gmail.com")!)
                 }
             }
             .navigationBarTitle("settings & info")
@@ -62,7 +57,7 @@ struct SettingsView: View {
                         tutorialSheetPresent = true
                     } label: {
                         Image(systemName: "questionmark.circle")
-                            .foregroundColor(.black)
+                            .foregroundColor(.orange)
                             .fontWeight(.semibold)
                             .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10))
                     }

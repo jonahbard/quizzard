@@ -14,7 +14,7 @@ final class UserDataModel: ObservableObject {
     let colors: [Color] = [.red, .purple, .indigo, .blue, .green]
     
     @Published var userTimerList: [TestTimer] = [
-        TestTimer(reviewPeriod: 2, lengthMin: 10, colorIndex: 1, title: "sample timer", numberOfQuestions: 4)
+        TestTimer(reviewPeriod: 1, lengthMin: 2, colorIndex: 1, title: "sample timer", numberOfQuestions: 2)
     ]
     @Published var selectedTestTimer: TestTimer?
     @Published var selectedTestTimerIndex: UUID?

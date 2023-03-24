@@ -15,12 +15,24 @@ struct MinimalistTimerView: View {
     @EnvironmentObject var model: UserDataModel
     
     @State var menuShown = false
-    @State var rectangleHeightProportion: Double
+    @State var rectangleHeightProportion = 1.0
     @State var paused = false
     
     func resizeRectangle(){
-        if rectangleHeightProportion > 0 {
-            rectangleHeightProportion = model.functioningTimerModel!.timeRemainingThisQuestionProportion
+        if rectangleHeightProportion > 0 && rectangleHeightProportion > model.functioningTimerModel!.timeRemainingThisQuestionProportion {
+            withAnimation(.linear(duration: 1)){
+                rectangleHeightProportion = model.functioningTimerModel!.timeRemainingThisQuestionProportion
+            }
+        } else if rectangleHeightProportion < model.functioningTimerModel!.timeRemainingThisQuestionProportion {
+            withAnimation(.none){
+                rectangleHeightProportion = model.functioningTimerModel!.timeRemainingThisQuestionProportion
+            }
+        }
+    }
+    
+    func resetRectangle(){
+        withAnimation(.none){
+            rectangleHeightProportion = 1
         }
     }
     
@@ -28,7 +40,7 @@ struct MinimalistTimerView: View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
                 Rectangle()
-                    .frame(width: geometry.size.width, height: geometry.size.height*rectangleHeightProportion)
+                    .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height*rectangleHeightProportion)
                     .opacity(0.5)
                     .foregroundColor(model.colors[model.selectedTestTimer!.colorIndex].opacity(0.5))
                 VStack {
@@ -36,6 +48,7 @@ struct MinimalistTimerView: View {
                     Spacer()
                     Spacer()
                     Text(model.functioningTimerModel!.reviewPeriodOn ? "review!" : String(model.functioningTimerModel!.currentQuestion))
+                        .animation(.none)
                         .fontWeight(.bold)
                         .font(.title3)
                         .foregroundColor(rectangleHeightProportion > 0 ? .black : .red)
@@ -77,6 +90,7 @@ struct MinimalistTimerView: View {
                     HStack {
                         Button {
                             model.functioningTimerModel!.backQuestion()
+                            resetRectangle()
                         } label: {
                             Rectangle()
                                 .opacity(0)
@@ -86,6 +100,7 @@ struct MinimalistTimerView: View {
                         Spacer()
                         Button {
                             model.functioningTimerModel!.nextQuestion()
+                            resetRectangle()
                         } label: {
                             Rectangle()
                                 .opacity(0)
@@ -97,14 +112,8 @@ struct MinimalistTimerView: View {
                 }
             }
             .onReceive(model.functioningTimerModel!.timer) { _ in
-                if !paused {
-                    withAnimation(.linear(duration: 1)){
-                        resizeRectangle()
-                    }
-                }
-                if model.functioningTimerModel!.timerDone {
-                    dismiss()
-                }
+                if !paused {resizeRectangle()}
+                if model.functioningTimerModel!.timerDone {dismiss()}
             }
         }
         .ignoresSafeArea(.all)

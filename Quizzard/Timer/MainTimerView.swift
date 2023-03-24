@@ -16,6 +16,7 @@ struct MainTimerView: View {
         
     @State var viewIsPaused = false
     @State var totalTimeRemainingView = ""
+    @State var timePerQuestionRemainingView = ""
     @State var resetAlertShowing = false
     @State var exitAlertShowing = false
     @State var timerDone = false
@@ -63,6 +64,8 @@ struct MainTimerView: View {
                             title: Text("exit timer?"),
                             message: Text("progress will not be saved."),
                             primaryButton: .destructive(Text("exit"), action: {
+                                totalTimeRemainingView = ""
+                                timePerQuestionRemainingView = ""
                                 model.functioningTimerModel!.reset()
                                 dismiss()
                             }),
@@ -78,7 +81,7 @@ struct MainTimerView: View {
                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 30, trailing: 0))
                 Spacer()
                 if (model.selectedTestTimer!.reviewPeriod==0 || !model.functioningTimerModel!.reviewPeriodOn ){
-                    Text(model.functioningTimerModel!.timeRemainingThisQuestionAsString)
+                    Text(timePerQuestionRemainingView)
                         .font(.system(size: 70, weight: .medium))
                         .padding()
                         .frame(width: 250)
@@ -92,7 +95,6 @@ struct MainTimerView: View {
                         .font(.title3)
                         .padding(EdgeInsets(top: 50, leading: 0, bottom: 50, trailing: 0))
                 }
-                
                                 
                 HStack(spacing:50) {
                     Button("❮ back") {
@@ -104,7 +106,6 @@ struct MainTimerView: View {
                     }.foregroundColor(model.colors[model.selectedTestTimer!.colorIndex])
                         .disabled(!model.functioningTimerModel!.isRunning || (model.functioningTimerModel!.currentQuestion >= model.functioningTimerModel!.totalQuestions && model.functioningTimerModel!.reviewPeriod == 0) || model.functioningTimerModel!.reviewPeriodOn)
                 }
-                
                 .padding()
                 .alert(isPresented: self.$timerDone){
                     Alert(
@@ -129,6 +130,7 @@ struct MainTimerView: View {
             }
             .onReceive(model.functioningTimerModel!.timer) { _ in
                 model.functioningTimerModel!.updateCountdowns()
+                timePerQuestionRemainingView = model.functioningTimerModel!.timeRemainingThisQuestionAsString
                 totalTimeRemainingView = model.functioningTimerModel!.timeRemainingAsString
                 if model.functioningTimerModel!.timerDone == true {
                     self.timerDone = true
@@ -138,13 +140,5 @@ struct MainTimerView: View {
             
                     
         }
-        .navigationBarBackButtonHidden(true)
-        .onAppear(
-            perform: {
-                model.functioningTimerModel!.start()
-                totalTimeRemainingView = model.functioningTimerModel!.timeRemainingAsString
-                
-            }
-        )
-    }
+        .navigationBarBackButtonHidden(true)    }
 }
