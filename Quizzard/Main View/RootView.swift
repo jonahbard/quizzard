@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RootView: View {
     
+    //initiates tutorialWasShown to false; once dismissed is always true
     @AppStorage("tutorialWasShown") var tutorialWasShown = false
     
     @EnvironmentObject var model: UserDataModel
@@ -34,6 +35,8 @@ struct RootView: View {
                                         TimerPreview(indexInTimerList: index, notes: model.userTimerList[index].note)
                                     } label: {
                                         TimerPreviewBox(testTimer: model.userTimerList[index])
+                                        
+                                        //sets current timer, index, and functioningTM
                                     }.simultaneousGesture(TapGesture().onEnded{
                                         model.selectedTestTimerIndex = model.userTimerList[index].id
                                         model.selectedTestTimer = model.userTimerList[index]
@@ -48,12 +51,15 @@ struct RootView: View {
                                     model.userTimerList.remove(atOffsets: indexSet)
                                 }
                             } else {
-                                Spacer()
+                                Rectangle()
+                                    .foregroundColor(.clear)
                                 Text("tap + to add a timer!").foregroundColor(.gray)
-                                Spacer()
+                                Rectangle()
+                                    .foregroundColor(.clear)
                             }
                         }
                     }
+                    //top nav bar
                     .overlay {
                         ZStack(alignment: .bottom) {
                             Color.gray.opacity(0.4)
@@ -65,6 +71,7 @@ struct RootView: View {
                                     .foregroundColor(.clear)
                                     .frame(height:45)
                                 HStack {
+                                    //plus button
                                     Button (
                                         action: {
                                             createTimerSheetPresented = true
@@ -78,6 +85,7 @@ struct RootView: View {
                                             .frame(alignment: .bottom)
                                         }
                                     Spacer()
+                                    //settings button
                                     NavigationLink {
                                         SettingsView()
                                     } label: {
@@ -116,6 +124,7 @@ struct RootView: View {
             .sheet(isPresented: $createTimerSheetPresented){
                 CreateTimer()
             }
+            //tutorial
             .fullScreenCover(
                 isPresented: .constant(!tutorialWasShown), content: {
                     TutorialView() {

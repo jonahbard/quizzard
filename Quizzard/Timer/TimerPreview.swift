@@ -20,6 +20,7 @@ struct TimerPreview: View {
     @State var editMode = false
     @State var deleteDialogShowing = false
     
+    //show its estimate for time per question based on the timer
     func calculateTimePerQuestion(testLengthMin: Int, questions: Int) -> String {
         let timeExcludingReviewPeriod = testLengthMin-reviewPeriodLengthMin
         let minPerQuestion = timeExcludingReviewPeriod / questions
@@ -28,7 +29,7 @@ struct TimerPreview: View {
         return "\(minPerQuestion):" + potentialZeroInTensPlace + "\(secRemainderPerQuestion)"
     }
 
-    @FocusState var notesFocused: Bool
+    @FocusState var notesFocused: Bool // currently editing in notes?
     
     var body: some View {
         NavigationStack {
@@ -63,10 +64,11 @@ struct TimerPreview: View {
                         .font(Font.system(.title))
                         .padding(.bottom, 0.01)
                     
-                    Text("\(model.selectedTestTimer!.numberOfQuestions) Questions • \(model.selectedTestTimer!.lengthMin) Minutes")
+                    Text("\(model.selectedTestTimer!.lengthMin) Minutes • \(model.selectedTestTimer!.numberOfQuestions) Questions")
                         .font(Font.system(.title3).smallCaps())
                         .padding(.bottom, 20)
                     
+                    // review period display + modifier
                     Stepper(value: $reviewPeriodLengthMin, in: 0...(model.selectedTestTimer!.lengthMin/2), step: 1) {
                         Text("review period: \(reviewPeriodLengthMin) min")
                     } onEditingChanged: { _ in
@@ -78,11 +80,6 @@ struct TimerPreview: View {
                     .font(.headline)
                     .foregroundColor(.black)
                     
-//                    Text("my review period: \(reviewPeriodLengthMin):00")
-//                        .font(Font.system(.headline))
-//                        .foregroundColor(.black)
-//                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
-                    
                     Text("time per question: " + calculateTimePerQuestion(testLengthMin: model.selectedTestTimer!.lengthMin, questions: model.selectedTestTimer!.numberOfQuestions))
                         .font(Font.system(.headline))
                         .foregroundColor(.black.opacity(0.4))
@@ -92,9 +89,6 @@ struct TimerPreview: View {
                         Spacer()
                         NavigationLink {
                             MainTimerView()
-//                                .onAppear(perform: {
-//                                    model.functioningTimerModel!.start()
-//                                })
                         } label: {
                             Text("start session")
                         }.simultaneousGesture(TapGesture().onEnded{
@@ -104,6 +98,8 @@ struct TimerPreview: View {
                         .padding(.bottom, 30)
                         Spacer()
                     }
+                    
+                    // note box
                     ZStack {
                         Rectangle()
                             .cornerRadius(20)
@@ -147,16 +143,12 @@ struct TimerPreview: View {
                                     model.userTimerList.remove(atOffsets: IndexSet(integer: indexInTimerList))
 //                                    model.userTimerList.remove(at: model.selectedTestTimerIndex!)
 //                                    model.resetIDs()
-//                                    model.selectedTestTimerIndex = nil
-//                                    model.selectedTestTimer = nil
-//                                    model.functioningTimerModel = nil
                                 }),
                                 secondaryButton: .cancel(Text("cancel"))
                             )
                         }
                         Spacer()
                     }
-                    //Spacer()
                 }
                 .padding(EdgeInsets(top: 0, leading: 45, bottom: 0, trailing: 45))
             }

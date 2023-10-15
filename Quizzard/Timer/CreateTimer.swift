@@ -25,6 +25,8 @@ struct CreateTimer: View {
     var body: some View {
         NavigationView {
             Form {
+                
+                // input fields
                 Section(){
                     TextField("test name", text: $testNameField)
                         .padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 7))
@@ -54,8 +56,8 @@ struct CreateTimer: View {
                     
                 }
                 
-                //ColorSelector
             }
+            // nav bar
             .navigationBarTitle("create timer")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading, content: {
@@ -65,21 +67,23 @@ struct CreateTimer: View {
                 })
                 ToolbarItem {
                     Button("save") {
+                        // if it actually works as a timer...
                         if testNameField != "" && (timeLimitMin*60)/numberOfQuestions >= 5 {
                             model.userTimerList.append(TestTimer(reviewPeriod: 0, lengthMin: timeLimitMin, colorIndex: colorIndex, title: testNameField, numberOfQuestions: numberOfQuestions))
                             dismiss()
-                        } else if (timeLimitMin*60)/numberOfQuestions < 5 {
+                        } else if (timeLimitMin*60)/numberOfQuestions < 5 { // bro less than 5 secs per question what
                             notEnoughTimeDialogShowing = true
-                        } else {
+                        } else { // bro make a title
                             makeATitleDialogShowing = true
                         }
-                        //Navigate to the preview of this timer?
                         
-                        //model.selectedTestTimerIndex = model.newTestTimerIndex
+                        //May change later: Navigate to the preview of this timer upon creation?
                         
-                        //model.functioningTimerModel = FunctioningTimerModel(length: model.userTimerList[model.selectedTestTimerIndex!].lengthMin, questions: model.userTimerList[model.selectedTestTimerIndex!].numberOfQuestions)
-                        
-                        //model.selectedTestTimerIndex =
+                            //model.selectedTestTimerIndex = model.newTestTimerIndex
+                            
+                            //model.functioningTimerModel = FunctioningTimerModel(length: model.userTimerList[model.selectedTestTimerIndex!].lengthMin, questions: model.userTimerList[model.selectedTestTimerIndex!].numberOfQuestions)
+                            
+                            //model.selectedTestTimerIndex = ...
                     }
                     .alert(isPresented: $makeATitleDialogShowing){
                         Alert(title: Text("hmmm... 🤔"), message: Text("your test needs a name!"))

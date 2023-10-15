@@ -14,11 +14,14 @@ struct TimerPreviewBox: View {
     
     var body: some View {
         ZStack (alignment: .leading) {
+            //colored rounded rectangle
             Rectangle()
                 .cornerRadius(30)
                 .foregroundColor(model.colors[testTimer.colorIndex].opacity(0.5))
                 .frame(alignment: .leading)
                 .shadow(color: .gray.opacity(0.4), radius: 5, x: 0, y: 5)
+            
+            //preview text
             VStack(alignment: .leading) {
                 Text(testTimer.title)
                     .frame(alignment: .trailing)
@@ -26,10 +29,11 @@ struct TimerPreviewBox: View {
                     .font(.title)
                     .foregroundColor(.black)
                     .padding(.bottom, 0.5)
-                Text("\(String(testTimer.numberOfQuestions)) questions")
-                    .padding(.bottom, 0.1)
-                    .foregroundColor(.black)
                 Text("\(String(testTimer.lengthMin)) minutes")
+                    .foregroundColor(.black)
+                    .padding(.bottom, 0.1)
+
+                Text("\(String(testTimer.numberOfQuestions)) questions")
                     .foregroundColor(.black)
                 Spacer()
             }

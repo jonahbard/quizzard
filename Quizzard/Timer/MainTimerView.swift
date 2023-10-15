@@ -80,7 +80,9 @@ struct MainTimerView: View {
                 Text("total time remaining")
                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 30, trailing: 0))
                 Spacer()
-                if (model.selectedTestTimer!.reviewPeriod==0 || !model.functioningTimerModel!.reviewPeriodOn ){
+                
+                // if not review period--faster when check STT first
+                if (model.selectedTestTimer!.reviewPeriod==0 || !model.functioningTimerModel!.reviewPeriodRunning ){
                     Text(timePerQuestionRemainingView)
                         .font(.system(size: 70, weight: .medium))
                         .padding()
@@ -95,7 +97,7 @@ struct MainTimerView: View {
                         .font(.title3)
                         .padding(EdgeInsets(top: 50, leading: 0, bottom: 50, trailing: 0))
                 }
-                                
+                // increment buttons
                 HStack(spacing:50) {
                     Button("❮ back") {
                         model.functioningTimerModel!.backQuestion()
@@ -104,13 +106,13 @@ struct MainTimerView: View {
                     Button("next ❯") {
                         model.functioningTimerModel!.nextQuestion()
                     }.foregroundColor(model.colors[model.selectedTestTimer!.colorIndex])
-                        .disabled(!model.functioningTimerModel!.isRunning || (model.functioningTimerModel!.currentQuestion >= model.functioningTimerModel!.totalQuestions && model.functioningTimerModel!.reviewPeriod == 0) || model.functioningTimerModel!.reviewPeriodOn)
+                        .disabled(!model.functioningTimerModel!.isRunning || (model.functioningTimerModel!.currentQuestion >= model.functioningTimerModel!.totalQuestions && model.functioningTimerModel!.reviewPeriod == 0) || model.functioningTimerModel!.reviewPeriodRunning)
                 }
                 .padding()
                 .alert(isPresented: self.$timerDone){
                     Alert(
                         title: Text("timer done!"), dismissButton: .default(Text("ok"), action: {
-                        //AudioServicesDisposeSystemSoundID(1000)
+                        //AudioServicesDisposeSystemSoundID(1000) // uncomment if u want your ears to hate u
                             model.functioningTimerModel!.timerDone = false
                             model.functioningTimerModel!.reset()
                             self.timerDone = false
@@ -128,6 +130,7 @@ struct MainTimerView: View {
                 Spacer()
                 
             }
+            //update view on each timer increment. at some point need to move the timer itself into this view.
             .onReceive(model.functioningTimerModel!.timer) { _ in
                 model.functioningTimerModel!.updateCountdowns()
                 timePerQuestionRemainingView = model.functioningTimerModel!.timeRemainingThisQuestionAsString

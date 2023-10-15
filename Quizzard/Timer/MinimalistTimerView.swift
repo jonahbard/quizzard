@@ -18,6 +18,7 @@ struct MinimalistTimerView: View {
     @State var rectangleHeightProportion = 1.0
     @State var paused = false
     
+    //resize, called each timer run and animated for smoothness
     func resizeRectangle(){
         if rectangleHeightProportion > 0 && rectangleHeightProportion > model.functioningTimerModel!.timeRemainingThisQuestionProportion {
             withAnimation(.linear(duration: 1)){
@@ -30,6 +31,7 @@ struct MinimalistTimerView: View {
         }
     }
     
+    //reset
     func resetRectangle(){
         withAnimation(.none){
             rectangleHeightProportion = 1
@@ -39,21 +41,24 @@ struct MinimalistTimerView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
+                // the actual rectangle that moves with the timer
                 Rectangle()
                     .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height*rectangleHeightProportion)
                     .opacity(0.5)
                     .foregroundColor(model.colors[model.selectedTestTimer!.colorIndex].opacity(0.5))
+                // current question
                 VStack {
                     Spacer()
                     Spacer()
                     Spacer()
-                    Text(model.functioningTimerModel!.reviewPeriodOn ? "review!" : String(model.functioningTimerModel!.currentQuestion))
+                    Text(model.functioningTimerModel!.reviewPeriodRunning ? "review!" : String(model.functioningTimerModel!.currentQuestion))
                         .animation(.none)
                         .fontWeight(.bold)
                         .font(.title3)
                         .foregroundColor(rectangleHeightProportion > 0 ? .black : .red)
                     Spacer()
                 }
+                //menu view + function
                 VStack {
                     Rectangle().foregroundColor(.clear).frame(height: 55)
                     if !menuShown {
@@ -86,7 +91,7 @@ struct MinimalistTimerView: View {
                         .padding()
 
                     }
-
+                    // invisible question increment/decrement
                     HStack {
                         Button {
                             model.functioningTimerModel!.backQuestion()
@@ -111,6 +116,7 @@ struct MinimalistTimerView: View {
                     }
                 }
             }
+            //updater (should potentially give this own struct a timer at some point)
             .onReceive(model.functioningTimerModel!.timer) { _ in
                 if !paused {resizeRectangle()}
                 if model.functioningTimerModel!.timerDone {dismiss()}

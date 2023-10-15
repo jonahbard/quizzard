@@ -12,6 +12,8 @@ typealias action = () -> Void
 
 struct TutorialView: View {
     
+    
+    // view declaration in Root must take an actual inline closure to set tutorialpresented to true
     init(handler: @escaping action) {
         self.handler = handler
     }
@@ -28,10 +30,13 @@ struct TutorialView: View {
         TabView(selection: $pageIndex){
             ForEach(pages) { page in
                 VStack {
+                    //display tutorial page
                     Spacer()
                     TutorialPageView(page: page)
                         .padding()
                     Spacer()
+                    
+                    //if last tutorial page, present dismiss button. handler takes in method action
                     if page.index+1==pages.count {
                         withAnimation {
                             Button("let's go!"){

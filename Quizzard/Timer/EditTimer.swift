@@ -44,7 +44,7 @@ struct EditTimer: View {
                             }
                         }
                     }.pickerStyle(WheelPickerStyle())
-                    Picker("time limit", selection: $numberOfQuestions) {
+                    Picker("questions", selection: $numberOfQuestions) {
                         ForEach(2...150, id: \.self) { number in
                             Text("\(number) questions")
                         }
@@ -95,8 +95,6 @@ struct EditTimer: View {
             }
             .alert(isPresented: $notEnoughTimeDialogShowing){
                 Alert(title: Text("slow down there, cowboy 🤠"), message: Text("are you sure you have enough time for each question?"))
-            }.onAppear {
-                titleFocused = true
             }
             
         }
